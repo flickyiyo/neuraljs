@@ -1,6 +1,8 @@
 import React from 'react';
+import { inject, observer } from 'mobx-react';
 
-export default class App extends React.Component {
+@inject('store') @observer
+class App extends React.Component {
   render() {
     return (
       <div>
@@ -11,3 +13,4 @@ export default class App extends React.Component {
     )
   }
 }
+export default App;
