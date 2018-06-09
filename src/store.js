@@ -1,10 +1,12 @@
 import {observable} from 'mobx';
 import Red from './Red';
+import Neurona from './Neurona';
 import Conf from './Conf';
 
 class Store {
   @observable red = new Red();
   @observable conf = Conf;
+  neurona = undefined;
 
   changeValue(chkIndex, arrIndex) {
     console.log(this.conf[arrIndex]);
@@ -14,6 +16,19 @@ class Store {
     } else {
       this.conf[arrIndex][chkIndex] = 0;      
     }
+  }
+
+  mostrarEntrenamiento() {
+    const entradas = this.conf.join().split(',');
+    if(this.neurona === undefined) {
+      this.neurona = new Neurona(entradas);
+    }
+    // const neurona = new Neurona(entradas);
+    console.log(this.neurona);
+    const salida = this.neurona.activacion();
+    const error = 1 - salida;
+    this.neurona.entrenar(error, 1);
+    console.log(this.neurona);
   }
 
 }

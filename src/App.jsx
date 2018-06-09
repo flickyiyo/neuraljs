@@ -7,9 +7,9 @@ import autobind from 'autobind';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.changeCheck = this.changeCheck.bind(this);
+    // this.changeCheck = this.changeCheck.bind(this);
   }
-
+  @autobind
   changeCheck(chkIndex, arrIndex){
     this.props.store.changeValue(chkIndex, arrIndex);
   }
@@ -37,6 +37,9 @@ class App extends React.Component {
           {
             rendereables
           }
+        </div>
+        <div>
+          <button onClick={() => this.props.store.mostrarEntrenamiento()} >Entrenar</button>
         </div>
       </div>
     )
