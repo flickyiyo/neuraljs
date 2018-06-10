@@ -4,9 +4,10 @@ export default class Neurona {
   pesos = [];
   factorEntrenamiento = 0.1;
   salida = undefined;
-  constructor(entradas) {
+  constructor(entradas, act = undefined) {
     this.entradas = entradas;
     this.pesos = this.entradas.map(() => 0);
+    this.act = act.bind(this);
   }
 
   activacion() {

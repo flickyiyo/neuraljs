@@ -3,14 +3,14 @@ import LineOfChecks from './LineOfChecks';
 import { inject, observer } from 'mobx-react';
 import autobind from 'autobind';
 
-@inject('store') @observer 
+@inject('store') @observer
 class App extends React.Component {
   constructor(props) {
     super(props);
     // this.changeCheck = this.changeCheck.bind(this);
   }
   @autobind
-  changeCheck(chkIndex, arrIndex){
+  changeCheck(chkIndex, arrIndex) {
     this.props.store.changeValue(chkIndex, arrIndex);
   }
 
@@ -21,7 +21,7 @@ class App extends React.Component {
         <div>
           {
             arr.map((chk, chkIndex) => (
-              <input type="checkbox" checked={chk===1} onClick={() => this.changeCheck(chkIndex, arrIndex)} />
+              <input type="checkbox" checked={chk === 1} onClick={() => this.changeCheck(chkIndex, arrIndex)} />
             ))
           }
         </div>
@@ -39,6 +39,13 @@ class App extends React.Component {
           }
         </div>
         <div>
+          <input
+            type="number"
+            onChange={(ev) => {
+              this.props.store.deseado = ev.target.value;
+            }}
+            value={this.props.store.deseado}
+          />
           <button onClick={() => this.props.store.mostrarEntrenamiento()} >Entrenar</button>
         </div>
       </div>

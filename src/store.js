@@ -6,6 +6,7 @@ import Conf from './Conf';
 class Store {
   @observable red = new Red();
   @observable conf = Conf;
+  @observable deseado = 1;
   neurona = undefined;
 
   changeValue(chkIndex, arrIndex) {
@@ -26,8 +27,8 @@ class Store {
     // const neurona = new Neurona(entradas);
     console.log(this.neurona);
     const salida = this.neurona.activacion();
-    const error = 1 - salida;
-    this.neurona.entrenar(error, 1);
+    const error = this.deseado - salida;
+    this.neurona.entrenar(error, this.deseado);
     console.log(this.neurona);
   }
 
