@@ -4,10 +4,11 @@ export default class Neurona {
   pesos = [];
   factorEntrenamiento = 0.1;
   salida = undefined;
-  constructor(entradas, act = undefined) {
+  constructor(entradas, umbral = .5, act = undefined) {
     this.entradas = entradas;
     this.pesos = this.entradas.map(() => 0);
-    this.act = act.bind(this);
+    // this.act = act.bind(this);
+    this.umbral = umbral;
   }
 
   activacion() {
@@ -16,7 +17,7 @@ export default class Neurona {
       acumulador += this.pesos[indice] * entrada;
     });
     this.salida = acumulador;
-    return acumulador > .5 ? 1 : 0;
+    return acumulador > this.umbral ? 1 : 0;
   }
 
   @autobind

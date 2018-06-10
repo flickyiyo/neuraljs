@@ -14,6 +14,11 @@ class App extends React.Component {
     this.props.store.changeValue(chkIndex, arrIndex);
   }
 
+  @autobind
+  changeExpected(ev) {
+    this.props.store.setExpected(parseInt(ev.target.value))
+  }
+
   render() {
     const chks = this.props.store.conf;
     const rendereables = chks.map((arr, arrIndex) => {
@@ -27,6 +32,22 @@ class App extends React.Component {
         </div>
       )
     });
+
+
+    const deseado = (
+      <div>
+        <input type="radio" name="des" value={0} onChange={this.changeExpected}  /> 0 
+        <input type="radio" name="des" value={1} onChange={this.changeExpected} /> 1
+        <input type="radio" name="des" value={2} onChange={this.changeExpected} /> 2
+        <input type="radio" name="des" value={3} onChange={this.changeExpected} /> 3
+        <input type="radio" name="des" value={4} onChange={this.changeExpected} /> 4
+        <input type="radio" name="des" value={5} onChange={this.changeExpected} /> 5
+        <input type="radio" name="des" value={6} onChange={this.changeExpected} /> 6
+        <input type="radio" name="des" value={7} onChange={this.changeExpected} /> 7
+        <input type="radio" name="des" value={8} onChange={this.changeExpected}  /> 8
+        <input type="radio" name="des" value={9} onChange={this.changeExpected}  /> 9
+      </div>
+    )
 
     return (
       <div>
@@ -47,6 +68,11 @@ class App extends React.Component {
             value={this.props.store.deseado}
           />
           <button onClick={() => this.props.store.mostrarEntrenamiento()} >Entrenar</button>
+        </div>
+        <div>
+          {
+            deseado
+          }
         </div>
       </div>
     )

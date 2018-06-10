@@ -6,15 +6,21 @@ export default class Capa {
    */
   neuronas = [];
   constructor(nNeuronas, entradas) {
-    for(let i = 0; i < nNeuronas; i++) {
-      this.neuronas.push(new Neurona(entradas));
+    if(entradas!==undefined) {
+      for (let i = 0; i < nNeuronas; i++) {
+        this.neuronas.push(new Neurona(entradas));
+      }
     }
   }
 
   setEntradas(entradas) {
-    for(let i = 0; i < this.neuronas.length; i++){
+    for (let i = 0; i < this.neuronas.length; i++) {
       this.neuronas[i].entradas = entradas;
     }
+  }
+
+  getSalidas() {
+    return this.neuronas.map((neurona) => neurona.salida);
   }
 
   /**
@@ -22,10 +28,18 @@ export default class Capa {
    * @param {Array} valoresDeseados Es un arreglo de igual longitud que las neuronas de la capa
    */
   entrenarNeuronas(valoresDeseados) {
-    if(valoresDeseados.length === this.neuronas.length) {
+    if (valoresDeseados.length === this.neuronas.length) {
       this.neuronas.forEach((neurona, indiceNeurona) => {
-        neurona.activacion();
-        neurona
+        console.log('desde capa', indiceNeurona, neurona);
+        const salida = neurona.activacion();
+        const error = valoresDeseados[indiceNeurona] - salida;
+        let valor = undefined;
+        neurona.entrenar(error, valoresDeseados[indiceNeurona]);
+        while (neurona.salida != valor && neurona.salida != valoresDeseados[indiceNeurona]) {
+          valor = neurona.activacion();
+          console.log(neurona);
+          neurona.entrenar(error, valoresDeseados[indiceNeurona]);
+        }
       });
     }
   }
