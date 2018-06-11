@@ -20,7 +20,7 @@ export default class Capa {
   }
 
   getSalidas() {
-    return this.neuronas.map((neurona) => neurona.salida);
+    return this.neuronas.map((neurona) => neurona.activacion());
   }
 
   /**

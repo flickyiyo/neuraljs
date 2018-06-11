@@ -11,6 +11,11 @@ export default class Red {
     this.capaEntrada.setEntradas(entradas);
   }
 
+  obtenerResultadosEntrada(entradas) {
+    this.capaEntrada.setEntradas(entradas);
+    return this.capaEntrada.getSalidas();
+  }
+
   getSalidasOfEntrada() {
     return this.capaEntrada.getSalidas();
   }

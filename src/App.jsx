@@ -68,6 +68,7 @@ class App extends React.Component {
             value={this.props.store.deseado}
           />
           <button onClick={() => this.props.store.mostrarEntrenamiento()} >Entrenar</button>
+          <button onClick={this.props.store.obtenerValor} >Obtener Resultados</button>
         </div>
         <div>
           {

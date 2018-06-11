@@ -2,10 +2,10 @@ import { observable } from 'mobx';
 import Red from './Red';
 import Neurona from './Neurona';
 import Conf from './Conf';
+import autobind from 'autobind-decorator';
 
 class Store {
   @observable conf = Conf;
-  @observable red;
   @observable deseado = 1;
   deseados = [0, 1, 0, 0, 0, 0, 0, 0, 0, 0];
 
@@ -24,7 +24,6 @@ class Store {
     this.red = new Red(this.conf.join().split(',').map(n => parseInt(n)));
   }
   changeValue(chkIndex, arrIndex) {
-    console.log(this.conf[arrIndex]);
     const casilla = this.conf[arrIndex][chkIndex];
     if (casilla === 0) {
       this.conf[arrIndex][chkIndex] = 1;
@@ -32,6 +31,12 @@ class Store {
       this.conf[arrIndex][chkIndex] = 0;
     }
   }
+  @autobind
+  obtenerValor() {
+    const entradas = this.conf.join().split(',');
+    console.log(this.red.obtenerResultadosEntrada(entradas));
+  }
+
 
   mostrarEntrenamiento() {
     const entradas = this.conf.join().split(',');
