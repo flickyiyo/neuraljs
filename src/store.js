@@ -18,6 +18,10 @@ class Store {
     });
     console.log(this.deseados);
   }
+  @autobind
+  trainWithSet() {
+    this.red.entrenarConSet();
+  }
 
   neurona = undefined;
   constructor() {
@@ -33,6 +37,7 @@ class Store {
   }
   @autobind
   obtenerValor() {
+    this.red.entrenarConSet();
     const entradas = this.conf.join().split(',');
     console.log(this.red.obtenerResultadosEntrada(entradas));
   }

@@ -69,6 +69,8 @@ class App extends React.Component {
           />
           <button onClick={() => this.props.store.mostrarEntrenamiento()} >Entrenar</button>
           <button onClick={this.props.store.obtenerValor} >Obtener Resultados</button>
+          <button onClick={this.props.store.trainWithSet} >Set</button>
+
         </div>
         <div>
           {

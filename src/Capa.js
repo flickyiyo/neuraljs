@@ -6,13 +6,12 @@ export default class Capa {
    */
   neuronas = [];
   constructor(nNeuronas, entradas) {
-    if(entradas!==undefined) {
+    if (entradas !== undefined) {
       for (let i = 0; i < nNeuronas; i++) {
         this.neuronas.push(new Neurona(entradas));
       }
     }
   }
-
   setEntradas(entradas) {
     for (let i = 0; i < this.neuronas.length; i++) {
       this.neuronas[i].entradas = entradas;
@@ -34,15 +33,16 @@ export default class Capa {
         const error = valoresDeseados[indiceNeurona] - salida;
         let valor = undefined;
         neurona.entrenar(error, valoresDeseados[indiceNeurona]);
+
         while (
           neurona.salida < valoresDeseados[indiceNeurona] - neurona.rangoError ||
           neurona.salida > valoresDeseados[indiceNeurona] + neurona.rangoError
         ) {
           valor = neurona.activacionSigmoidal();
-          console.log(neurona);
           neurona.entrenar(error, valoresDeseados[indiceNeurona]);
         }
       });
+      
     }
   }
 

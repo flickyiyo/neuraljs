@@ -2,7 +2,7 @@ import autobind from 'autobind-decorator';
 export default class Neurona {
   entradas = [];
   pesos = [];
-  factorEntrenamiento = 0.1;
+  factorEntrenamiento = 0.2;
   salida = undefined;
   rangoError = 0.001;
   constructor(entradas, umbral = .5, act = undefined) {
@@ -11,7 +11,7 @@ export default class Neurona {
     // this.act = act.bind(this);
     this.umbral = umbral;
   }
-
+  @autobind
   activacionSigmoidal() {
     let x = 0;
     this.entradas.forEach((entrada, indice) => {
@@ -32,7 +32,7 @@ export default class Neurona {
   }
 
   @autobind
-  entrenar(error, valorDeseado) {
+  entrenar(error) {
 
     const pesosNuevos = [];
     this.entradas.forEach((entrada, indice) => {
