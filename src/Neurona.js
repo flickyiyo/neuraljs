@@ -4,11 +4,22 @@ export default class Neurona {
   pesos = [];
   factorEntrenamiento = 0.1;
   salida = undefined;
+  rangoError = 0.001;
   constructor(entradas, umbral = .5, act = undefined) {
     this.entradas = entradas;
     this.pesos = this.entradas.map(() => 0);
     // this.act = act.bind(this);
     this.umbral = umbral;
+  }
+
+  activacionSigmoidal() {
+    let x = 0;
+    this.entradas.forEach((entrada, indice) => {
+      x += entrada * this.pesos[indice];
+    });
+    const resultado = 1 / (1 + Math.pow(Math.E, -x));
+    this.salida = resultado;
+    return resultado;
   }
 
   activacion() {
@@ -30,7 +41,7 @@ export default class Neurona {
       )
     });
     this.pesos = pesosNuevos;
-    this.salida = this.activacion();
+    this.activacionSigmoidal();
     return this.salida;
   }
 }

@@ -20,7 +20,7 @@ export default class Capa {
   }
 
   getSalidas() {
-    return this.neuronas.map((neurona) => neurona.activacion());
+    return this.neuronas.map((neurona) => neurona.activacionSigmoidal());
   }
 
   /**
@@ -30,13 +30,15 @@ export default class Capa {
   entrenarNeuronas(valoresDeseados) {
     if (valoresDeseados.length === this.neuronas.length) {
       this.neuronas.forEach((neurona, indiceNeurona) => {
-        console.log('desde capa', indiceNeurona, neurona);
-        const salida = neurona.activacion();
+        const salida = neurona.activacionSigmoidal();
         const error = valoresDeseados[indiceNeurona] - salida;
         let valor = undefined;
         neurona.entrenar(error, valoresDeseados[indiceNeurona]);
-        while (neurona.salida != valor && neurona.salida != valoresDeseados[indiceNeurona]) {
-          valor = neurona.activacion();
+        while (
+          neurona.salida < valoresDeseados[indiceNeurona] - neurona.rangoError ||
+          neurona.salida > valoresDeseados[indiceNeurona] + neurona.rangoError
+        ) {
+          valor = neurona.activacionSigmoidal();
           console.log(neurona);
           neurona.entrenar(error, valoresDeseados[indiceNeurona]);
         }

@@ -21,7 +21,6 @@ export default class Red {
   }
 
   entrenarCapaEntrada(entradas, valoresDeseados) {
-    console.log('desde red', entradas, valoresDeseados);
     this.capaEntrada.setEntradas(entradas);
     this.capaEntrada.entrenarNeuronas(valoresDeseados);
   }
