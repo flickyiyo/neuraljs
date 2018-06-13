@@ -3,15 +3,36 @@ import Capa from './Capa';
 import { tranings } from './Conf';
 
 export default class Red {
-  constructor(entradas) {
+  capas =  [];
+  constructor(nEntradas, entradas) {
+    this.capas = new Array(nEntradas);
     this.capaEntrada = new Capa(10, entradas);
     this.capaSalida = new Capa(1, undefined);
+  }
+
+  /**
+   * 
+   * @param {Array} nNeuronasPorCapa 
+   */
+  setNeuronasInCapa(nNeuronasPorCapa) {
+    if(this.capas.length === nNeuronasPorCapa.length) {
+      nNeuronasPorCapa.forEach((numero, indiceNumer) => {
+        this.capas[indiceNumer] = new Capa(nNeuronasPorCapa);
+      }); 
+    }
+    return 0;
   }
 
   getArregloIdentidad(n) {
     const arr = new Array(10).fill(0);
     arr[n] = 1;
     return arr;
+  }
+
+  backPropagation(valoresDeseados) {
+    
+    this.capas.forEach((capa, indiceCapa) => {
+    });
   }
 
   entrenarConSet() {

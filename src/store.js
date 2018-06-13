@@ -3,6 +3,7 @@ import Red from './Red';
 import Neurona from './Neurona';
 import Conf from './Conf';
 import autobind from 'autobind-decorator';
+import _ from 'lodash';
 
 class Store {
   @observable conf = Conf;
@@ -18,6 +19,12 @@ class Store {
     });
     console.log(this.deseados);
   }
+
+  @autobind
+  mostrarRed() {
+    console.log(this.red);
+  }
+
   @autobind
   trainWithSet() {
     this.red.entrenarConSet();
@@ -25,7 +32,7 @@ class Store {
 
   neurona = undefined;
   constructor() {
-    this.red = new Red(this.conf.join().split(',').map(n => parseInt(n)));
+    this.red = new Red(3, this.conf.join().split(',').map(n => parseInt(n)));
   }
   changeValue(chkIndex, arrIndex) {
     const casilla = this.conf[arrIndex][chkIndex];
@@ -37,7 +44,7 @@ class Store {
   }
   @autobind
   obtenerValor() {
-    this.red.entrenarConSet();
+    // this.red.entrenarConSet();
     const entradas = this.conf.join().split(',');
     console.log(this.red.obtenerResultadosEntrada(entradas));
   }
@@ -61,5 +68,5 @@ class Store {
 }
 
 const store = new Store();
-
+window.store = store;
 export default store;

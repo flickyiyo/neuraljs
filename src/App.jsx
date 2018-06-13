@@ -52,7 +52,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>
-          This is the Neural Network Practice
+          Redes Neuronales
         </h1>
         <div>
           {
