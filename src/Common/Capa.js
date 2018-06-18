@@ -10,6 +10,16 @@ module.exports = class Capa {
     this.neuronas = neuronas;
   }
 
+  calcularSalidas() {
+    for (let i = 0; i < this.neuronas.length; i++) {
+      this.neuronas[i].entradas = this.entradas;
+      this.neuronas[i].activacion();
+      this.salidas[i] = this.neuronas[i].salida;
+    }
+    return this.salidas;
+
+  }
+
   /**
    * 
    * @param {Array} entradas 
@@ -23,7 +33,7 @@ module.exports = class Capa {
   }
 
   getSalidas() {
-    for(let i = 0 ; i < this.neuronas.length ; i++) {
+    for (let i = 0; i < this.neuronas.length; i++) {
       this.salidas = this.neuronas[i].salida;
     }
     return this.neuronas.map(neurona => neurona.salida);
@@ -51,6 +61,17 @@ module.exports = class Capa {
           error = valoresEsperados[indiceNeurona] - neurona.salida;
         }
       });
+    }
+  }
+
+  entrenar() {
+    for(let i = 0; i < this.neuronas.length; i++) {
+      while(error !== 0 ){
+        this.neuronas[i].activacion();
+        this.neuronas[i].entrenarNeurona(error);
+        this.neuronas[i].activacion();
+        this.salidas[i] = this.neuronas[i].salida;
+      } 
     }
   }
 

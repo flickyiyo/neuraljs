@@ -5,12 +5,17 @@ export default class Neurona {
   factorEntrenamiento = 0.2;
   salida = undefined;
   rangoError = 0.001;
+
   constructor(entradas = [], umbral = .5, act = undefined) {
     this.entradas = entradas;
     this.pesos = this.entradas.map(() => 0);
-    // this.act = act.bind(this);
     this.umbral = umbral;
   }
+
+  setRandomWeights() {
+
+  }
+  
   @autobind
   activacionSigmoidal() {
     let x = 0;
@@ -22,6 +27,7 @@ export default class Neurona {
     return resultado;
   }
 
+  @autobind
   activacion() {
     let acumulador = 0;
     this.entradas.forEach((entrada, indice) => {

@@ -2,6 +2,7 @@ module.exports = class Neurona {
   pesos = [];
   factorEntrenamiento = 0.1;
   valor = undefined;
+  umbral = .5;
   /**
    * 
    * @param {Array} entradas 
@@ -23,7 +24,8 @@ module.exports = class Neurona {
     this.entradas.forEach((entrada, indiceEntrada) => {
       acumulador += this.pesos[indiceEntrada] * entrada;
     });
-    this.salida = acumulador > this.umbral ? 1 : 0;
+    acumulador += this.umbral;
+    this.salida = acumulador > .6 ? 1 : 0;
     this.valor = acumulador;
     return this.salida;
   }

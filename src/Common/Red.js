@@ -18,8 +18,9 @@ module.exports = class Red {
   feedforward(entradas) {
     this.capas[0].entradas = entradas;
     for (let i = 0; i < this.capas.length; i++) {
-      this.capas[i].getSalidas();
+      this.capas[i].calcularSalidas();
     }
+    return this.capas[this.capas.length-1].salidas;
   }
 
   /**
@@ -52,12 +53,14 @@ module.exports = class Red {
    * 
    * @param {Array} valoresEsperadosSalida 
    */
-  backpropagation(valoresEsperadosSalida) {
+  backpropagation(entradas, valoresEsperadosSalida) {
+    this.feedforward(entradas);
     for (let i = this.capas.length - 1; i >= 0; i--) {
       if (i === this.capas.length - 1) {
-        const salidas = this.capas[i].getSalidas();
-        const errores = this.getErrores(valoresEsperadosSalida, salidas);
-        this.capas[i].entrenarCapa(valoresEsperadosSalida);
+        const salidas = this.capas[i].salidas;
+        if(i === this.capas.length -1 ){
+          this.capas[i].entrenarCapa(valoresEsperadosSalida);
+        }
       }
     }
   }

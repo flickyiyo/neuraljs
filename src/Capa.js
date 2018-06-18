@@ -12,10 +12,10 @@ export default class Capa {
       }
     }
   }
+
   setEntradas(entradas) {
     for (let i = 0; i < this.neuronas.length; i++) {
       this.neuronas[i].entradas = entradas;
-
     }
   }
 
@@ -32,7 +32,7 @@ export default class Capa {
     if (valoresDeseados.length === this.neuronas.length) {
       this.neuronas.forEach((neurona, indiceNeurona) => {
         const salida = neurona.activacion();
-        const error = valoresDeseados[indiceNeurona] - salida;
+        let error = valoresDeseados[indiceNeurona] - salida;
         let valor = undefined;
         neurona.entrenar(error, valoresDeseados[indiceNeurona]);
         while (
@@ -43,6 +43,7 @@ export default class Capa {
           console.log(neurona);
           valor = neurona.activacion();
           neurona.entrenar(error, valoresDeseados[indiceNeurona]);
+          error = valoresDeseados[indiceNeurona] - neurona.salida;
         }
       });
       
